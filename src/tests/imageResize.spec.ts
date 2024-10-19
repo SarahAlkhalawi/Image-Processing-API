@@ -1,6 +1,5 @@
 import { resizeImage } from '../utils/imageResize';
 import fs from 'fs-extra';
-import sharp from 'sharp';
 import path from 'path';
 
 const ASSETS_DIR = path.join(__dirname, '../..', 'assets');
@@ -11,19 +10,8 @@ describe("Image Resizing", () => {
   const imageName = "testImage"; 
   const height = 300;
   const width = 300;
-  const fullImagePath = path.join(FULL_DIR, `${imageName}.jpg`);
   const thumbImagePath = path.join(THUMB_DIR, `${imageName}_${width}_${height}.jpg`);
 
-  beforeAll(async () => {
-    await sharp({
-      create: {
-        width: 800,
-        height: 800,
-        channels: 3,
-        background: { r: 255, g: 0, b: 0, alpha: 1 }
-      }
-    }).toFile(fullImagePath);
-  });
   it("should create a resized image", async () => {
     const resultPath = await resizeImage(imageName, width, height);
     expect(resultPath).toEqual(thumbImagePath);

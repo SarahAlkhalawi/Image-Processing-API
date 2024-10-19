@@ -27,3 +27,5 @@ export const resizeImage = async (imageName: string, width: number, height: numb
 
   return thumbImagePath; 
 };
+
+export default resizeImage;
